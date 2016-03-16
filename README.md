@@ -8,6 +8,7 @@
 5. rails s
 
 ![Demo](https://github.com/afgnsu/has_many/blob/master/DEMO.png)
+![Demo4](https://github.com/afgnsu/has_many/blob/master/DEMO4.png)
 ![Demo2](https://github.com/afgnsu/has_many/blob/master/DEMO2.png)
 ![Demo3](https://github.com/afgnsu/has_many/blob/master/DEMO3.png)
-![Demo4](https://github.com/afgnsu/has_many/blob/master/DEMO4.png)
+
