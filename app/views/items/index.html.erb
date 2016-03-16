@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Items</h1>
+
+<table border=1 cellpadding=5 cellspacing=0>
+  <thead>
+    <tr bgcolor=#CCC>
+      <th>Name</th>
+      <th>Child</th>
+      <th colspan="4" align=center>Maintain</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td align=center><%= item.item_child.count %></td>
+        <td><%= link_to 'Show', item_path(item) %></td>
+        <td><%= link_to 'Multi', multi_item_path(item.id) %></td>
+        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '<button>New Item</button>'.html_safe, new_item_path %>

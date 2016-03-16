@@ -1,0 +1,67 @@
+<% content_for :head do %>
+<style>
+  span{
+    display:inline-block;
+    margin:0 4px;
+    border-radius:5px;
+    padding:0 4px;
+    cursor:pointer;
+  }
+  span.add{
+    background:#cfc;
+  }
+  span.del{
+    background:#fcc;
+  }
+  .template{
+    display:none;
+  }
+  li{
+    padding:2px 10px;
+    margin:2px;
+    background:#ffd;
+    border:1px #dd6 solid;
+    border-radius:10px;
+  }
+  li.old_record{
+    background:#ddf;
+    border-color:#66d;
+  }
+</style>
+<script>
+function bind_item(target){
+  target.find('.add').click(function(){
+    var temp = $('.template').clone().removeClass('template');
+    temp.find("input , select").each(function(){
+      $(this).attr('name' , $(this).attr('data-name'));
+    });
+    $('ol').append(bind_item(temp));
+  }).siblings('.del').click(function(){
+    if($('ol li').length > 2){
+      $(this).parent('li').remove();
+    }
+  });
+  return target;
+}
+jQuery(function($){
+  bind_item($('ol li'));
+  if($('ol li').length === 1){ //only template
+    $('ol li .add').click();
+  }
+});
+</script>
+<% end %>
+
+<h1>Multi : <%= @item.name %></h1>
+
+<%= form_tag multi_save_item_path do %>
+  <% age_list = (18..30).to_a %>
+  <ol>
+    <li class="template">name<input data-name="ic[name][]"> , age<select data-name="ic[age][]"><%= options_for_select(age_list) %></select><span class="add">add</span><span class="del">del</span></li>
+    <% @item_childs.each do |old_ic| %>
+      <li class="old_record">name<%= text_field_tag "ic_old[#{old_ic.id}][name]" , old_ic.name %> , age<%= select_tag "ic_old[#{old_ic.id}][age]" , options_for_select(age_list , old_ic.age) %></select><span class="add">add</span><span class="del">del</span> (<%= old_ic.id %>)</li>
+    <% end %>
+  </ol>
+  <button type="submit">Submit</button>
+  <%= link_to '<button>Back</button>'.html_safe, items_path %>
+<% end %>

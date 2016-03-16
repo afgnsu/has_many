@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @item.name %>
+</p>
+
+<p>
+  <strong>Item Child:</strong>
+  <ol>
+    <% @item.item_child.each do |child| %>
+    <li style='color:blue;'><%= "#{child.name} - #{child.age}" %></li>
+    <% end %>
+  </ol>
+</p>
+
+<%= link_to '<button>Edit</button>'.html_safe, edit_item_path(@item) %>
+<%= link_to '<button>Back</button>'.html_safe, root_path %>
